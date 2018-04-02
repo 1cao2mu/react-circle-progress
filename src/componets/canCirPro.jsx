@@ -2,7 +2,7 @@
  * @Author: cyy 
  * @Date: 2018-04-02 15:04:13 
  * @Last Modified by: cyy
- * @Last Modified time: 2018-04-02 16:46:12
+ * @Last Modified time: 2018-04-02 17:24:02
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
@@ -93,8 +93,8 @@ export default class CanCirPro extends Component {
 
             ctx.beginPath();
             let grd1 = ctx.createLinearGradient(0, 0, 0, this.props.radius*2);
-            grd1.addColorStop(0, "#ffd460");
-            grd1.addColorStop(1, "#fcc241");
+            grd1.addColorStop(0, this.props.startcolor);
+            grd1.addColorStop(1, this.props.centercolor);
             ctx.lineCap = 'round';
             ctx.strokeStyle = grd1;
             ctx.lineWidth = this.props.borderWidth;
@@ -110,8 +110,8 @@ export default class CanCirPro extends Component {
             if (percent > 50) {
                 ctx.beginPath();
                 let grd2 = ctx.createLinearGradient(0, this.props.radius*2, 0, 0);
-                grd2.addColorStop(0, "#fcc241");
-                grd2.addColorStop(1, "#f79d00");
+                grd2.addColorStop(0, this.props.centercolor);
+                grd2.addColorStop(1, this.props.endColor);
                 ctx.lineCap = 'round';
                 ctx.strokeStyle = grd2;
                 ctx.lineWidth = this.props.borderWidth;
