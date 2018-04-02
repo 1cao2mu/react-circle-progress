@@ -2,15 +2,23 @@
  * @Author: cyy 
  * @Date: 2018-04-02 15:04:13 
  * @Last Modified by: cyy
- * @Last Modified time: 2018-04-02 15:46:09
+ * @Last Modified time: 2018-04-02 16:27:15
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 export default class CanCirPro extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            percent: 0,
+        };
+    }
+
     static defaultProps = {
         radius: 45,
-        percent: 97,
+        percent: 47.7,
         borderWidth: 6,
         startcolor: '#ffd460',
         centercolor: '#fcc241',
@@ -33,6 +41,7 @@ export default class CanCirPro extends Component {
         }} >
             <canvas className="cancirproIn" ref={cancirpro => {
                 this._cancirpro = cancirpro;
+
                 this.onDraw(cancirpro);
             }}
                 width={(this.props.radius + this.props.borderWidth) * 2} height={(this.props.radius + this.props.borderWidth) * 2}
@@ -43,11 +52,27 @@ export default class CanCirPro extends Component {
                 height: (this.props.radius + this.props.borderWidth) * 2,
             }} >
                 {this.props.children ? this.props.children :
-                    <div style={this.props.textStyle}>{this.props.percent}%</div>}
+                    <div style={this.props.textStyle}>{this.state.percent}%</div>}
             </div>
 
         </div>);
     }
+
+    componentDidMount() {
+        this.startAnimation();
+    }
+
+    startAnimation() {
+        if (this.state.percent < this.props.percent-1) {
+            this.time = setTimeout(() => {
+                this.setState({ percent: this.state.percent + 1 });
+                this.startAnimation();
+            }, 10);
+        } else {
+            this.setState({ percent: this.props.percent });
+        }
+    }
+
     onDraw(cancirpro) {
         if (cancirpro) {
             let canvas = this._cancirpro;
@@ -69,11 +94,16 @@ export default class CanCirPro extends Component {
             ctx.lineCap = 'round';
             ctx.strokeStyle = grd1;
             ctx.lineWidth = this.props.borderWidth;
-            ctx.arc(this.props.radius + this.props.borderWidth, this.props.radius + this.props.borderWidth, this.props.radius, Math.PI * (1.4), Math.PI * (1.4 + 1), false);
+
+            if (this.state.percent< 50) {
+                ctx.arc(this.props.radius + this.props.borderWidth, this.props.radius + this.props.borderWidth, this.props.radius, Math.PI * (1.4), Math.PI * (1.4 + this.state.percent/ 50), false);
+            }else{
+                ctx.arc(this.props.radius + this.props.borderWidth, this.props.radius + this.props.borderWidth, this.props.radius, Math.PI * (1.4), Math.PI * (1.4 + 1), false);
+            }
             ctx.stroke();
 
 
-            if (this.props.percent > 50) {
+            if (this.state.percent > 50) {
                 ctx.beginPath();
                 let grd2 = ctx.createLinearGradient(0, 90, 0, 0);
                 grd2.addColorStop(0, "#fcc241");
@@ -81,7 +111,7 @@ export default class CanCirPro extends Component {
                 ctx.lineCap = 'round';
                 ctx.strokeStyle = grd2;
                 ctx.lineWidth = this.props.borderWidth;
-                ctx.arc(this.props.radius + this.props.borderWidth, this.props.radius + this.props.borderWidth, this.props.radius, Math.PI * (2.4), Math.PI * (2.4 + ((this.props.percent - 50) / 50)), false);
+                ctx.arc(this.props.radius + this.props.borderWidth, this.props.radius + this.props.borderWidth, this.props.radius, Math.PI * (2.4), Math.PI * (2.4 + ((this.state.percent - 50) / 50)), false);
                 ctx.stroke();
             }
         }
