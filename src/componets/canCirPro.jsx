@@ -2,7 +2,7 @@
  * @Author: cyy 
  * @Date: 2018-04-02 15:04:13 
  * @Last Modified by: cyy
- * @Last Modified time: 2018-04-02 16:27:15
+ * @Last Modified time: 2018-04-02 16:44:15
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
@@ -23,7 +23,8 @@ export default class CanCirPro extends Component {
         startcolor: '#ffd460',
         centercolor: '#fcc241',
         endColor: '#f79d00',
-        textStyle: { fontSize: 11, color: "#fa9a22", textAlign: 'center' }
+        textStyle: { fontSize: 11, color: "#fa9a22", textAlign: 'center' },
+        openAnimation: false
     }
     static propTypes = {
         radius: PropTypes.number,
@@ -33,6 +34,7 @@ export default class CanCirPro extends Component {
         centercolor: PropTypes.string,
         endColor: PropTypes.string,
         textStyle: PropTypes.object,
+        openAnimation: PropTypes.bool,
     }
     render() {
         return (<div className="cancirproOut" style={{
@@ -52,22 +54,24 @@ export default class CanCirPro extends Component {
                 height: (this.props.radius + this.props.borderWidth) * 2,
             }} >
                 {this.props.children ? this.props.children :
-                    <div style={this.props.textStyle}>{this.state.percent}%</div>}
+                    <div style={this.props.textStyle}>{this.props.openAnimation ? this.state.percent : this.props.percent}%</div>}
             </div>
 
         </div>);
     }
 
     componentDidMount() {
-        this.startAnimation();
+        if (this.props.openAnimation) {
+            this.startAnimation();
+        }
     }
 
     startAnimation() {
-        if (this.state.percent < this.props.percent-1) {
+        if (this.state.percent < this.props.percent - 2) {
             this.time = setTimeout(() => {
-                this.setState({ percent: this.state.percent + 1 });
+                this.setState({ percent: this.state.percent + 2 });
                 this.startAnimation();
-            }, 10);
+            }, 11);
         } else {
             this.setState({ percent: this.props.percent });
         }
@@ -75,9 +79,9 @@ export default class CanCirPro extends Component {
 
     onDraw(cancirpro) {
         if (cancirpro) {
+            let percent=this.props.openAnimation ? this.state.percent : this.props.percent;
             let canvas = this._cancirpro;
             let ctx = canvas.getContext("2d");
-
             let width = (this.props.radius + this.props.borderWidth) * 2;
             if (window.devicePixelRatio) {
                 canvas.style.width = width + "px";
@@ -95,15 +99,15 @@ export default class CanCirPro extends Component {
             ctx.strokeStyle = grd1;
             ctx.lineWidth = this.props.borderWidth;
 
-            if (this.state.percent< 50) {
-                ctx.arc(this.props.radius + this.props.borderWidth, this.props.radius + this.props.borderWidth, this.props.radius, Math.PI * (1.4), Math.PI * (1.4 + this.state.percent/ 50), false);
-            }else{
+            if (percent < 50) {
+                ctx.arc(this.props.radius + this.props.borderWidth, this.props.radius + this.props.borderWidth, this.props.radius, Math.PI * (1.4), Math.PI * (1.4 + percent / 50), false);
+            } else {
                 ctx.arc(this.props.radius + this.props.borderWidth, this.props.radius + this.props.borderWidth, this.props.radius, Math.PI * (1.4), Math.PI * (1.4 + 1), false);
             }
             ctx.stroke();
 
 
-            if (this.state.percent > 50) {
+            if (percent > 50) {
                 ctx.beginPath();
                 let grd2 = ctx.createLinearGradient(0, 90, 0, 0);
                 grd2.addColorStop(0, "#fcc241");
@@ -111,7 +115,7 @@ export default class CanCirPro extends Component {
                 ctx.lineCap = 'round';
                 ctx.strokeStyle = grd2;
                 ctx.lineWidth = this.props.borderWidth;
-                ctx.arc(this.props.radius + this.props.borderWidth, this.props.radius + this.props.borderWidth, this.props.radius, Math.PI * (2.4), Math.PI * (2.4 + ((this.state.percent - 50) / 50)), false);
+                ctx.arc(this.props.radius + this.props.borderWidth, this.props.radius + this.props.borderWidth, this.props.radius, Math.PI * (2.4), Math.PI * (2.4 + ((percent - 50) / 50)), false);
                 ctx.stroke();
             }
         }
