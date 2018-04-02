@@ -2,7 +2,7 @@
  * @Author: cyy 
  * @Date: 2018-04-02 15:04:13 
  * @Last Modified by: cyy
- * @Last Modified time: 2018-04-02 16:44:15
+ * @Last Modified time: 2018-04-02 16:46:12
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
@@ -24,7 +24,7 @@ export default class CanCirPro extends Component {
         centercolor: '#fcc241',
         endColor: '#f79d00',
         textStyle: { fontSize: 11, color: "#fa9a22", textAlign: 'center' },
-        openAnimation: false
+        openAnimation: true
     }
     static propTypes = {
         radius: PropTypes.number,
@@ -92,7 +92,7 @@ export default class CanCirPro extends Component {
             }
 
             ctx.beginPath();
-            let grd1 = ctx.createLinearGradient(0, 0, 0, 90);
+            let grd1 = ctx.createLinearGradient(0, 0, 0, this.props.radius*2);
             grd1.addColorStop(0, "#ffd460");
             grd1.addColorStop(1, "#fcc241");
             ctx.lineCap = 'round';
@@ -109,7 +109,7 @@ export default class CanCirPro extends Component {
 
             if (percent > 50) {
                 ctx.beginPath();
-                let grd2 = ctx.createLinearGradient(0, 90, 0, 0);
+                let grd2 = ctx.createLinearGradient(0, this.props.radius*2, 0, 0);
                 grd2.addColorStop(0, "#fcc241");
                 grd2.addColorStop(1, "#f79d00");
                 ctx.lineCap = 'round';
