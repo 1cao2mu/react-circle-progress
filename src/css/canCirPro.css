@@ -1,0 +1,19 @@
+/*
+ * @Author: cyy 
+ * @Date: 2018-04-02 15:04:31 
+ * @Last Modified by: cyy
+ * @Last Modified time: 2018-04-02 15:37:52
+ */
+.cancirproOut {
+    overflow: hidden;
+  }
+.cancirproIn {
+    position: absolute;
+  }
+.cancirproContent {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  
+  

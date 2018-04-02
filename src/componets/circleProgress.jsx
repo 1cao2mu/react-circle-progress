@@ -1,3 +1,9 @@
+/*
+ * @Author: cyy 
+ * @Date: 2018-04-02 15:04:22 
+ * @Last Modified by: cyy
+ * @Last Modified time: 2018-04-02 15:46:59
+ */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 export default class CircleProgress extends Component {
@@ -11,6 +17,26 @@ export default class CircleProgress extends Component {
             rightTransformerDegree: rightTransformerDegree,
             leftTransformerDegree: leftTransformerDegree,
         };
+    }
+
+    static propTypes = {
+        color: PropTypes.string,
+        bgcolor: PropTypes.string,
+        innerColor: PropTypes.string,
+        radius: PropTypes.number,
+        smallradius: PropTypes.number,
+        percent: PropTypes.number,
+        borderWidth: PropTypes.number,
+    }
+
+    static defaultProps = {
+        color: '#000',
+        radius: 20,
+        smallradius: 15,
+        percent: 0,
+        borderWidth: 2,
+        bgcolor: '#e3e3e3',
+        innerColor: '#fff',
     }
 
     switchDeg(type, percent) {
@@ -144,23 +170,3 @@ export default class CircleProgress extends Component {
     }
 }
 
-CircleProgress.propTypes = {
-    color: PropTypes.string,
-    bgcolor: PropTypes.string,
-    innerColor: PropTypes.string,
-    radius: PropTypes.number,
-    percent: PropTypes.number,
-    borderWidth: PropTypes.number,
-    textStyle: PropTypes.string,
-};
-
-CircleProgress.defaultProps = {
-    color: '#000',
-    radius: 20,
-    percent: 0,
-    borderWidth: 2,
-    bgcolor: '#e3e3e3',
-    innerColor: '#fff',
-    disabled: false,
-    textStyle: '',
-};
