@@ -18,7 +18,7 @@ export default class CanCirPro extends Component {
 
     static defaultProps = {
         radius: 45,
-        percent: 47.7,
+        percent: 1,
         borderWidth: 6,
         startcolor: '#ffd460',
         centercolor: '#fcc241',
@@ -78,7 +78,8 @@ export default class CanCirPro extends Component {
     }
 
     onDraw(cancirpro) {
-        if (cancirpro) {
+        
+        if (cancirpro&&this.props.percent!==0) {
             let percent=this.props.openAnimation ? this.state.percent : this.props.percent;
             let canvas = this._cancirpro;
             let ctx = canvas.getContext("2d");
