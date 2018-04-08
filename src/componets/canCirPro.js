@@ -2,7 +2,7 @@
  * @Author: cyy 
  * @Date: 2018-04-02 15:04:13 
  * @Last Modified by: cyy
- * @Last Modified time: 2018-04-02 17:24:02
+ * @Last Modified time: 2018-04-08 09:22:29
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
@@ -18,7 +18,7 @@ export default class CanCirPro extends Component {
 
     static defaultProps = {
         radius: 45,
-        percent: 1,
+        percent: 91,
         borderWidth: 6,
         startcolor: '#ffd460',
         centercolor: '#fcc241',

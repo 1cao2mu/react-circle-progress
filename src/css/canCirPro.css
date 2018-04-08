@@ -2,7 +2,7 @@
  * @Author: cyy 
  * @Date: 2018-04-02 15:04:31 
  * @Last Modified by: cyy
- * @Last Modified time: 2018-04-02 15:37:52
+ * @Last Modified time: 2018-04-08 09:22:28
  */
 .cancirproOut {
     overflow: hidden;
@@ -10,10 +10,13 @@
 .cancirproIn {
     position: absolute;
   }
-.cancirproContent {
-    justify-content: center;
-    align-items: center;
+  .cancirproContent {
     display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
   }
   
   

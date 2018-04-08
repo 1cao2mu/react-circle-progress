@@ -14,7 +14,7 @@ import './css/canCirPro.css';
 class App extends Component {
   render() {
     return (
-      <div>
+      <div style={{height:400,width:400,backgroundColor:"red"}}>
         <CircleProgress color={"#39bff7"} smallradius={30} radius={45} borderWidth={6} percent={88.88} bgcolor={"#e8eff4"} innerColor={"#ffffff"} />
         {/* <CanCirPro color={"#39bff7"} smallradius={30} radius={45} borderWidth={6} percent={97} bgcolor={"#e8eff4"} innerColor={"#ffffff"} /> */}
         <CanCirPro  />
