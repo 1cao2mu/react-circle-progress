@@ -36,14 +36,15 @@ export default class CanCirPro extends Component {
         textStyle: PropTypes.object,
         openAnimation: PropTypes.bool,
     }
+
+
+
     render() {
         return (<div className="cancirproOut" style={{
             width: (this.props.radius + this.props.borderWidth) * 2,
             height: (this.props.radius + this.props.borderWidth) * 2,
         }} >
-            <canvas className="cancirproIn" ref={cancirpro => {
-                this._cancirpro = cancirpro;
-
+            <canvas className="cancirproIn"  ref={cancirpro => {
                 this.onDraw(cancirpro);
             }}
                 width={(this.props.radius + this.props.borderWidth) * 2} height={(this.props.radius + this.props.borderWidth) * 2}
@@ -59,7 +60,17 @@ export default class CanCirPro extends Component {
 
         </div>);
     }
-
+    componentWillReceiveProps(newprops) {
+        if (this.props.openAnimation) {
+            this.setState({ percent: 0 });
+            this.time = setTimeout(() => {
+                this.componentDidMount();
+            }, 1);
+        }else{
+            this.setState({ percent: newprops.percent });
+        }
+        
+    }
     componentDidMount() {
         if (this.props.openAnimation) {
             this.startAnimation();
@@ -78,46 +89,50 @@ export default class CanCirPro extends Component {
     }
 
     onDraw(cancirpro) {
-        
-        if (cancirpro&&this.props.percent!==0) {
-            let percent=this.props.openAnimation ? this.state.percent : this.props.percent;
-            let canvas = this._cancirpro;
+        if (cancirpro) {
+            
+            let canvas = cancirpro;
             let ctx = canvas.getContext("2d");
-            let width = (this.props.radius + this.props.borderWidth) * 2;
-            if (window.devicePixelRatio) {
-                canvas.style.width = width + "px";
-                canvas.style.height = width + "px";
-                canvas.height = width * window.devicePixelRatio;
-                canvas.width = width * window.devicePixelRatio;
-                ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-            }
+            ctx.clearRect(0, 0, (this.props.radius + this.props.borderWidth) * 2, (this.props.radius + this.props.borderWidth) * 2);
 
-            ctx.beginPath();
-            let grd1 = ctx.createLinearGradient(0, 0, 0, this.props.radius*2);
-            grd1.addColorStop(0, this.props.startcolor);
-            grd1.addColorStop(1, this.props.centercolor);
-            ctx.lineCap = 'round';
-            ctx.strokeStyle = grd1;
-            ctx.lineWidth = this.props.borderWidth;
+            if (this.props.percent !== 0) {
+                let percent = this.props.openAnimation ? this.state.percent : this.props.percent;
+                let width = (this.props.radius + this.props.borderWidth) * 2;
+                if (window.devicePixelRatio) {
+                    canvas.style.width = width + "px";
+                    canvas.style.height = width + "px";
+                    canvas.height = width * window.devicePixelRatio;
+                    canvas.width = width * window.devicePixelRatio;
+                    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+                }
 
-            if (percent < 50) {
-                ctx.arc(this.props.radius + this.props.borderWidth, this.props.radius + this.props.borderWidth, this.props.radius, Math.PI * (1.4), Math.PI * (1.4 + percent / 50), false);
-            } else {
-                ctx.arc(this.props.radius + this.props.borderWidth, this.props.radius + this.props.borderWidth, this.props.radius, Math.PI * (1.4), Math.PI * (1.4 + 1), false);
-            }
-            ctx.stroke();
-
-
-            if (percent > 50) {
                 ctx.beginPath();
-                let grd2 = ctx.createLinearGradient(0, this.props.radius*2, 0, 0);
-                grd2.addColorStop(0, this.props.centercolor);
-                grd2.addColorStop(1, this.props.endColor);
+                let grd1 = ctx.createLinearGradient(0, 0, 0, this.props.radius * 2);
+                grd1.addColorStop(0, this.props.startcolor);
+                grd1.addColorStop(1, this.props.centercolor);
                 ctx.lineCap = 'round';
-                ctx.strokeStyle = grd2;
+                ctx.strokeStyle = grd1;
                 ctx.lineWidth = this.props.borderWidth;
-                ctx.arc(this.props.radius + this.props.borderWidth, this.props.radius + this.props.borderWidth, this.props.radius, Math.PI * (2.4), Math.PI * (2.4 + ((percent - 50) / 50)), false);
+
+                if (percent < 50) {
+                    ctx.arc(this.props.radius + this.props.borderWidth, this.props.radius + this.props.borderWidth, this.props.radius, Math.PI * (1.4), Math.PI * (1.4 + percent / 50), false);
+                } else {
+                    ctx.arc(this.props.radius + this.props.borderWidth, this.props.radius + this.props.borderWidth, this.props.radius, Math.PI * (1.4), Math.PI * (1.4 + 1), false);
+                }
                 ctx.stroke();
+
+
+                if (percent > 50) {
+                    ctx.beginPath();
+                    let grd2 = ctx.createLinearGradient(0, this.props.radius * 2, 0, 0);
+                    grd2.addColorStop(0, this.props.centercolor);
+                    grd2.addColorStop(1, this.props.endColor);
+                    ctx.lineCap = 'round';
+                    ctx.strokeStyle = grd2;
+                    ctx.lineWidth = this.props.borderWidth;
+                    ctx.arc(this.props.radius + this.props.borderWidth, this.props.radius + this.props.borderWidth, this.props.radius, Math.PI * (2.4), Math.PI * (2.4 + ((percent - 50) / 50)), false);
+                    ctx.stroke();
+                }
             }
         }
     }
