@@ -1,9 +1,10 @@
 /*
  * @Author: cyy 
- * @Date: 2018-04-02 15:04:13 
+ * @Date: 2018-04-16 17:42:39 
  * @Last Modified by: cyy
- * @Last Modified time: 2018-04-08 09:22:29
+ * @Last Modified time: 2018-04-16 18:24:24
  */
+
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
@@ -44,7 +45,7 @@ export default class CanCirPro extends Component {
             width: (this.props.radius + this.props.borderWidth) * 2,
             height: (this.props.radius + this.props.borderWidth) * 2,
         }} >
-            <canvas className="cancirproIn"  ref={cancirpro => {
+            <canvas className="cancirproIn" ref={cancirpro => {
                 this.onDraw(cancirpro);
             }}
                 width={(this.props.radius + this.props.borderWidth) * 2} height={(this.props.radius + this.props.borderWidth) * 2}
@@ -53,6 +54,7 @@ export default class CanCirPro extends Component {
             <div className="cancirproContent" style={{
                 width: (this.props.radius + this.props.borderWidth) * 2,
                 height: (this.props.radius + this.props.borderWidth) * 2,
+                marginTop:-(this.props.radius + this.props.borderWidth) * 2-4
             }} >
                 {this.props.children ? this.props.children :
                     <div style={this.props.textStyle}>{this.props.openAnimation ? this.state.percent : this.props.percent}%</div>}
@@ -66,10 +68,10 @@ export default class CanCirPro extends Component {
             this.time = setTimeout(() => {
                 this.componentDidMount();
             }, 1);
-        }else{
+        } else {
             this.setState({ percent: newprops.percent });
         }
-        
+
     }
     componentDidMount() {
         if (this.props.openAnimation) {
@@ -90,10 +92,12 @@ export default class CanCirPro extends Component {
 
     onDraw(cancirpro) {
         if (cancirpro) {
-            
+
             let canvas = cancirpro;
             let ctx = canvas.getContext("2d");
             ctx.clearRect(0, 0, (this.props.radius + this.props.borderWidth) * 2, (this.props.radius + this.props.borderWidth) * 2);
+
+
 
             if (this.props.percent !== 0) {
                 let percent = this.props.openAnimation ? this.state.percent : this.props.percent;
