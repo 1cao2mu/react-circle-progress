@@ -2,7 +2,7 @@
  * @Author: cyy 
  * @Date: 2018-04-16 17:42:26 
  * @Last Modified by: cyy
- * @Last Modified time: 2018-04-16 18:30:03
+ * @Last Modified time: 2018-04-16 18:54:02
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
@@ -19,7 +19,7 @@ export default class SvgCirPro extends Component {
     static defaultProps = {
         offset: 3.5,
         radius: 45,
-        percent: 98,
+        percent: 15,
         borderWidth: 6,
         startcolor: '#ffd460',
         centercolor: '#fcc241',
@@ -59,16 +59,29 @@ export default class SvgCirPro extends Component {
 
 
     render() {
-        let endAngle = 3.6 * this.props.percent;
+        let endAngle = 3.6 * (this.props.openAnimation ? this.state.percent : this.props.percent);
         let radius = this.props.radius;
         let width = (this.props.radius + this.props.borderWidth) * 2;
         let height = (this.props.radius + this.props.borderWidth) * 2;
-        let startPoint = this.coordMap(width / 2, height / 2, radius, 0-120);
-        let endPoint = this.coordMap(width / 2, height / 2, radius, endAngle-120);
-        let isBigAngle = endAngle > 180 ? 1 : 0;
+
+        let startPoint1, endPoint1, endPoint2;
+        if (endAngle <= 180) {
+            startPoint1 = this.coordMap(width / 2, height / 2, radius, 0 - 120);
+
+            endPoint1 = this.coordMap(width / 2, height / 2, radius, endAngle - 120);
+        } else {
+            startPoint1 = this.coordMap(width / 2, height / 2, radius, 0 - 120);
+
+            endPoint1 = this.coordMap(width / 2, height / 2, radius, 180 - 120);
+            endPoint2 = this.coordMap(width / 2, height / 2, radius, endAngle - 120);
+        }
 
 
-        
+
+
+
+
+
         return (<div className="svgcirproOut" style={{
             width: width,
             height: height,
@@ -78,25 +91,41 @@ export default class SvgCirPro extends Component {
             >
 
                 <defs>
+
                     <linearGradient id="lgrad1" x1="0" y1="0" x2="0" y2="100%" >
-                        <stop offset="0%" style={{ stopColor: "#ffd460", stopOpacity: 1 }} />
-                        <stop offset="100%" style={{ stopColor: "#f79d00", stopOpacity: 1 }} />
+                        <stop offset="0%" style={{ stopColor: this.props.startcolor, stopOpacity: 1 }} />
+                        <stop offset="100%" style={{ stopColor: this.props.centercolor, stopOpacity: 1 }} />
+                    </linearGradient>
+
+                    <linearGradient id="lgrad2" x1="0" y1="100%" x2="0" y2="0" >
+                        <stop offset="0%" style={{ stopColor: this.props.centercolor, stopOpacity: 1 }} />
+                        <stop offset="100%" style={{ stopColor: this.props.endColor, stopOpacity: 1 }} />
                     </linearGradient>
                 </defs>
 
                 <path
-                    d={"M" + startPoint.x + "," + startPoint.y + "A" + radius + "," + radius + ",0," + isBigAngle + ",1," + endPoint.x + "," + endPoint.y}
+                    d={"M" + startPoint1.x + "," + startPoint1.y + "A" + radius + "," + radius + ",0,0,1," + endPoint1.x + "," + endPoint1.y}
 
                     stroke="url(#lgrad1)"
                     fill="none"
                     strokeLinecap="round"
                     strokeWidth="5" />
+
+                {endAngle > 180 ? <path
+                    d={"M" + endPoint1.x + "," + endPoint1.y + "A" + radius + "," + radius + ",0,0,1," + endPoint2.x + "," + endPoint2.y}
+
+                    stroke="url(#lgrad2)"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeWidth="5" /> : null
+                }
+
             </svg>
 
             <div className="svgcirproContent" style={{
                 width: width,
                 height: height,
-                marginTop: -(height + this.props.offset)
+                marginTop: -(height+this.props.offset)
             }} >
                 {this.props.children ? this.props.children :
                     <div style={this.props.textStyle}>{this.props.openAnimation ? this.state.percent : this.props.percent}%</div>}
