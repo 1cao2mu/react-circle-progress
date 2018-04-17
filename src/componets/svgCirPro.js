@@ -92,12 +92,12 @@ export default class SvgCirPro extends Component {
 
                 <defs>
 
-                    <linearGradient id="lgrad1" x1="0" y1="0" x2="0" y2="100%" >
+                    <linearGradient id={"lgrad1" + this.props.startcolor} x1="0" y1="0" x2="0" y2="100%" >
                         <stop offset="0%" style={{ stopColor: this.props.startcolor, stopOpacity: 1 }} />
                         <stop offset="100%" style={{ stopColor: this.props.centercolor, stopOpacity: 1 }} />
                     </linearGradient>
 
-                    <linearGradient id="lgrad2" x1="0" y1="100%" x2="0" y2="0" >
+                    <linearGradient id={"lgrad2" + this.props.startcolor} x1="0" y1="100%" x2="0" y2="0" >
                         <stop offset="0%" style={{ stopColor: this.props.centercolor, stopOpacity: 1 }} />
                         <stop offset="100%" style={{ stopColor: this.props.endColor, stopOpacity: 1 }} />
                     </linearGradient>
@@ -106,18 +106,18 @@ export default class SvgCirPro extends Component {
                 <path
                     d={"M" + startPoint1.x + "," + startPoint1.y + "A" + radius + "," + radius + ",0,0,1," + endPoint1.x + "," + endPoint1.y}
 
-                    stroke="url(#lgrad1)"
+                    stroke={"url(#lgrad1" + this.props.startcolor + ")"}
                     fill="none"
                     strokeLinecap="round"
-                    strokeWidth="5" />
+                    strokeWidth={this.props.borderWidth} />
 
                 {endAngle > 180 ? <path
                     d={"M" + endPoint1.x + "," + endPoint1.y + "A" + radius + "," + radius + ",0,0,1," + endPoint2.x + "," + endPoint2.y}
 
-                    stroke="url(#lgrad2)"
+                    stroke={"url(#lgrad2" + this.props.startcolor + ")"}
                     fill="none"
                     strokeLinecap="round"
-                    strokeWidth="5" /> : null
+                    strokeWidth={this.props.borderWidth} /> : null
                 }
 
             </svg>
@@ -125,7 +125,7 @@ export default class SvgCirPro extends Component {
             <div className="svgcirproContent" style={{
                 width: width,
                 height: height,
-                marginTop: -(height+this.props.offset)
+                marginTop: -(height + this.props.offset)
             }} >
                 {this.props.children ? this.props.children :
                     <div style={this.props.textStyle}>{this.props.openAnimation ? this.state.percent : this.props.percent}%</div>}
