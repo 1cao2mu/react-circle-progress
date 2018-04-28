@@ -1,0 +1,23 @@
+/*
+ * @Author: cyy 
+ * @Date: 2018-04-16 17:48:24 
+ * @Last Modified by: cyy
+ * @Last Modified time: 2018-04-16 18:19:55
+ */
+
+.svgcirproOut {
+    overflow: hidden;
+  }
+/* .svgcirproIn {
+    position: absolute;
+  } */
+  .svgcirproContent {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+  }
+  
+  

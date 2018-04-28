@@ -6,6 +6,7 @@
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import '../css/circleProgress.css';
 export default class CircleProgress extends Component {
     constructor(props) {
         super(props);

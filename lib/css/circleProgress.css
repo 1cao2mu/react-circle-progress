@@ -1,0 +1,45 @@
+/*
+ * @Author: cyy 
+ * @Date: 2018-04-02 15:04:36 
+ * @Last Modified by:   cyy 
+ * @Last Modified time: 2018-04-02 15:04:36 
+ */
+  .circle{
+    overflow: hidden;
+    position: relative;
+    transform-style: preserve-3d;
+  }
+  .left-wrap{
+    overflow: hidden;
+    position: absolute;
+    top:0;
+  }
+  .right-wrap {
+    overflow: hidden;
+    position: absolute;
+    top:0;
+  }
+  
+  .loader{
+    position:absolute;
+    left:0;
+    top:0;
+    transform-origin: 0% 50%;
+  }
+
+  .loader2{
+    position:absolute;
+    left:0;
+    top:0;
+    transform-origin: 100% 50%;
+  }
+
+  .inner-circle {
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
