@@ -1,6 +1,6 @@
 react citcle progress three type CanCirPro SvgCirPro 支持渐变色和动画
 
-![localhost](/localhost1.gif =540x960)
+<img width="270" height="480" src="./localhost1.gif" />
 ### Installation
 
 ```cmake
