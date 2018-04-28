@@ -1,3 +1,7 @@
+---
+typora-root-url: ./
+---
+
 react citcle progress three type
 
 ### Installation
@@ -28,3 +32,4 @@ ReactDOM.render(<div>
 
 ```
 
+![localhost](/localhost.png)
