@@ -1,6 +1,6 @@
 {
   "name": "react-circle-progress",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "react citcle progress three type ",
   "main": "lib/indexExport.js",
   "scripts": {
