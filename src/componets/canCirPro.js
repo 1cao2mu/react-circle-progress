@@ -20,7 +20,7 @@ export default class CanCirPro extends Component {
 
     static defaultProps = {
         radius: 45,
-        percent: 91,
+        percent: 0,
         borderWidth: 6,
         startcolor: '#ffd460',
         centercolor: '#fcc241',

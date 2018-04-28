@@ -20,7 +20,7 @@ export default class SvgCirPro extends Component {
     static defaultProps = {
         offset: 3.5,
         radius: 45,
-        percent: 15,
+        percent: 0,
         borderWidth: 6,
         startcolor: '#ffd460',
         centercolor: '#fcc241',

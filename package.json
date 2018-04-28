@@ -2,8 +2,9 @@
   "name": "react-circle-progress",
   "version": "1.0.3",
   "description": "react citcle progress three type ",
-  "main": "lib/index.js",
+  "main": "lib/indexExport.js",
   "scripts": {
+    "start": "react-scripts start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src -d lib"
   },
