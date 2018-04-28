@@ -1,11 +1,30 @@
-三种圆环进度条的实现方式
+react citcle progress three type
 
+### Installation
 
-安装方法：
-
+```cmake
 npm i react-circle-progress
+```
 
-引用方法：
+### Usage
 
-
+```react
 import { SvgCirPro,CanCirPro,CircleProgress } from "react-circle-progress";
+```
+
+
+### More examples
+
+```react
+ReactDOM.render(<div>
+
+    <CircleProgress percent={33} />
+
+    <CanCirPro percent={88} />
+
+    <SvgCirPro percent={100}/>
+
+</div>, document.getElementById('root'));
+
+```
+

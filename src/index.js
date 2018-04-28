@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 
 ReactDOM.render(<div>
     <CircleProgress percent={33} />
-    <CanCirPro percent={66} />
-    <SvgCirPro percent={99}/>
+    <CanCirPro percent={88} />
+    <SvgCirPro percent={100}/>
 </div>, document.getElementById('root'));
 
