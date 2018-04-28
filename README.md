@@ -1,9 +1,6 @@
----
-typora-root-url: ./
----
-
 react citcle progress three type
 
+![localhost](/localhost.png)
 ### Installation
 
 ```cmake
@@ -32,4 +29,3 @@ ReactDOM.render(<div>
 
 ```
 
-![localhost](/localhost.png)
