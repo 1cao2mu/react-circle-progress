@@ -1,6 +1,6 @@
 react citcle progress three type
 
-![localhost](/localhost.png)
+![localhost](/localhost1.png)
 ### Installation
 
 ```cmake
