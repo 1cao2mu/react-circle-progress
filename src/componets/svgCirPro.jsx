@@ -1,13 +1,12 @@
 /*
  * @Author: cyy 
  * @Date: 2018-04-16 17:42:26 
- * @Last Modified by: cyy
- * @Last Modified time: 2018-04-16 18:54:02
+ * @Last Modified by: zl
+ * @Last Modified time: 2018-04-17 09:22:42
  */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import '../css/svgCirPro.css';
-
+//与CanCirPro原理相差不大
 export default class SvgCirPro extends Component {
 
     constructor(props) {
@@ -18,9 +17,9 @@ export default class SvgCirPro extends Component {
     }
 
     static defaultProps = {
-        offset: 3.5,
+        offset: 3,
         radius: 45,
-        percent: 0,
+        percent: 15,
         borderWidth: 6,
         startcolor: '#ffd460',
         centercolor: '#fcc241',
@@ -74,7 +73,7 @@ export default class SvgCirPro extends Component {
             startPoint1 = this.coordMap(width / 2, height / 2, radius, 0 - 120);
 
             endPoint1 = this.coordMap(width / 2, height / 2, radius, 180 - 120);
-            endPoint2 = this.coordMap(width / 2, height / 2, radius, endAngle - 120);
+            endPoint2 = this.coordMap(width / 2, height / 2, radius, endAngle - 130);
         }
 
 
@@ -87,46 +86,46 @@ export default class SvgCirPro extends Component {
             width: width,
             height: height,
         }} >
-            <svg className="svgcirproIn" ref={svgcirpro => {
-            }} height={height} version="1.1" width={width} xmlns="http://www.w3.org/2000/svg"
-            >
+        <svg className="svgcirproIn" ref={svgcirpro => {
+        }} height={height} version="1.1" width={width} xmlns="http://www.w3.org/2000/svg"
+        >
 
-                <defs>
+            <defs>
 
-                    <linearGradient id={"lgrad1" + this.props.startcolor} x1="0" y1="0" x2="0" y2="100%" >
-                        <stop offset="0%" style={{ stopColor: this.props.startcolor, stopOpacity: 1 }} />
-                        <stop offset="100%" style={{ stopColor: this.props.centercolor, stopOpacity: 1 }} />
-                    </linearGradient>
+                <linearGradient id={"lgrad1" + this.props.startcolor} x1="0" y1="0" x2="0" y2="100%" >
+                    <stop offset="0%" style={{ stopColor: this.props.startcolor, stopOpacity: 1 }} />
+                    <stop offset="100%" style={{ stopColor: this.props.centercolor, stopOpacity: 1 }} />
+                </linearGradient>
 
-                    <linearGradient id={"lgrad2" + this.props.startcolor} x1="0" y1="100%" x2="0" y2="0" >
-                        <stop offset="0%" style={{ stopColor: this.props.centercolor, stopOpacity: 1 }} />
-                        <stop offset="100%" style={{ stopColor: this.props.endColor, stopOpacity: 1 }} />
-                    </linearGradient>
-                </defs>
+                <linearGradient id={"lgrad2" + this.props.startcolor} x1="0" y1="100%" x2="0" y2="0" >
+                    <stop offset="0%" style={{ stopColor: this.props.centercolor, stopOpacity: 1 }} />
+                    <stop offset="100%" style={{ stopColor: this.props.endColor, stopOpacity: 1 }} />
+                </linearGradient>
+            </defs>
 
-                <path
-                    d={"M" + startPoint1.x + "," + startPoint1.y + "A" + radius + "," + radius + ",0,0,1," + endPoint1.x + "," + endPoint1.y}
+            <path
+                d={"M" + startPoint1.x + "," + startPoint1.y + "A" + radius + "," + radius + ",0,0,1," + endPoint1.x + "," + endPoint1.y}
 
-                    stroke={"url(#lgrad1" + this.props.startcolor + ")"}
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeWidth={this.props.borderWidth} />
+                stroke={"url(#lgrad1" + this.props.startcolor + ")"}
+                fill="none"
+                strokeLinecap="round"
+                strokeWidth={this.props.borderWidth} />
 
-                {endAngle > 180 ? <path
-                    d={"M" + endPoint1.x + "," + endPoint1.y + "A" + radius + "," + radius + ",0,0,1," + endPoint2.x + "," + endPoint2.y}
+            {endAngle > 180 ? <path
+                d={"M" + endPoint1.x + "," + endPoint1.y + "A" + radius + "," + radius + ",0,0,1," + endPoint2.x + "," + endPoint2.y}
 
-                    stroke={"url(#lgrad2" + this.props.startcolor + ")"}
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeWidth={this.props.borderWidth} /> : null
-                }
+                stroke={"url(#lgrad2" + this.props.startcolor + ")"}
+                fill="none"
+                strokeLinecap="round"
+                strokeWidth={this.props.borderWidth} /> : null
+            }
 
-            </svg>
+        </svg>
 
             <div className="svgcirproContent" style={{
                 width: width,
                 height: height,
-                marginTop: -(height + this.props.offset)
+                marginTop: -(height+this.props.offset)
             }} >
                 {this.props.children ? this.props.children :
                     <div style={this.props.textStyle}>{this.props.openAnimation ? this.state.percent : this.props.percent}%</div>}

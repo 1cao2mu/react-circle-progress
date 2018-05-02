@@ -1,16 +1,10 @@
-/*
- * @Author: cyy 
- * @Date: 2018-04-02 15:04:22 
- * @Last Modified by: cyy
- * @Last Modified time: 2018-04-02 15:46:59
- */
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import '../css/circleProgress.css';
+
 export default class CircleProgress extends Component {
     constructor(props) {
         super(props);
         const percent = props.percent;
+
         let { leftTransformerDegree, rightTransformerDegree } = this.switchDeg(this.props.type, percent)
         this.state = {
             percent: this.props.percent,
@@ -18,26 +12,6 @@ export default class CircleProgress extends Component {
             rightTransformerDegree: rightTransformerDegree,
             leftTransformerDegree: leftTransformerDegree,
         };
-    }
-
-    static propTypes = {
-        color: PropTypes.string,
-        bgcolor: PropTypes.string,
-        innerColor: PropTypes.string,
-        radius: PropTypes.number,
-        smallradius: PropTypes.number,
-        percent: PropTypes.number,
-        borderWidth: PropTypes.number,
-    }
-
-    static defaultProps = {
-        color: '#000',
-        radius: 20,
-        smallradius: 15,
-        percent: 0,
-        borderWidth: 2,
-        bgcolor: '#e3e3e3',
-        innerColor: '#fff',
     }
 
     switchDeg(type, percent) {
@@ -171,3 +145,23 @@ export default class CircleProgress extends Component {
     }
 }
 
+CircleProgress.propTypes = {
+    color: React.PropTypes.string,
+    bgcolor: React.PropTypes.string,
+    innerColor: React.PropTypes.string,
+    radius: React.PropTypes.number,
+    percent: React.PropTypes.number,
+    borderWidth: React.PropTypes.number,
+    textStyle: React.PropTypes.string,
+};
+
+CircleProgress.defaultProps = {
+    color: '#000',
+    radius: 20,
+    percent: 0,
+    borderWidth: 2,
+    bgcolor: '#e3e3e3',
+    innerColor: '#fff',
+    disabled: false,
+    textStyle: '',
+};

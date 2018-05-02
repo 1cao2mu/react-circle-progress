@@ -44,3 +44,5 @@ ReactDOM.render(<div>
 |   textStyle   |                       textStyle                       |
 | openAnimation |                     openAnimation                     |
 
+### qq交流群
+    179916551  欢迎交流前端各种问题
